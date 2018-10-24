@@ -1,0 +1,174 @@
+﻿@using Northwind.Models
+@model IEnumerable<Northwind.Models.Product>
+
+@{
+    ViewBag.Title = "Unit2Project";
+}
+
+<form action="@Url.Action("ProcessOrder", "Product")" method="post" id="orderForm">
+    <div class="panel panel-default">
+        <div class="panel-heading">Order</div>
+        <table class="table">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>Quantity</th>
+                <th class="hidden">Subtotal</th>
+            </tr>
+
+            @foreach (Product item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td id="price_@item.Id">
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <input type="number" name="@item.Id" id="@item.Id" class="form-control qty" value="0"/>
+                    </td>
+                    <td class="hidden" id="subtotal_@item.Id">
+                        0.00
+                    </td>
+                </tr>
+            }
+            <tfoot class="hidden">
+            <tr>
+                <th colspan="3">
+                    Total
+                </th>
+                <th id="total">
+                    0.00
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Customer Information</div>
+        <div class="container">
+            <div class="form-group" style="padding-top: 15px;">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Address" id="address" name="address" required/>
+            </div>
+            <div class="form-group">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="City" id="city" name="city" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="State" id="state" name="state" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Zip Code" id="zipCode" name="zipCode" required/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-default">Submit Order</button>
+</form>
+
+@section scripts {
+    <script>
+        $(function() {
+
+            $('.hidden').removeClass('hidden');
+
+            $('input.qty').each(function() {
+                $('#' + this.id).val(0);
+            });
+
+            $('input.qty').change(function() {
+                var qty = $('#' + this.id).val();
+                var price = $('#price_' + this.id).html();
+                if ((price * qty) >= 0) {
+                    $('#subtotal_' + this.id).html((qty * price).toFixed(2));
+                }
+
+                var total = 0;
+
+                $('input.qty').each(function() {
+                    total += Number($('#subtotal_' + this.id).html());
+                });
+
+                $('#total').html(total.toFixed(2));
+            });
+
+            $('#orderForm').validate({
+                rules: {
+                    firstName: {
+                        required: true,
+                        pattern: "^[a-zA-Z_]*$"
+                    },
+                    lastName: {
+                        pattern: "^[a-zA-Z_]*$",
+                        required: true
+
+                    },
+                    address: {
+                        required: true
+                    },
+                    city: {
+                        required: true,
+                        pattern: "^[a-zA-Z_]*$"
+                    },
+                    state: {
+                        required: true,
+                        minlength: 2,
+                        maxlength: 2,
+                        pattern: "^[a-zA-Z_]*$"
+                    },
+                    zipCode: {
+                        required: true,
+                        number: true,
+                        minlength: 5,
+                        maxlength: 5
+                    }
+                },
+
+                messages: {
+                    state: {
+                        minlength: "Please enter a valid state code",
+                        maxlength: "Please enter a valid state code"
+                    },
+                    zipCode: {
+                        minlength: "Please enter a valid zipcode",
+                        maxlength: "Please enter a valid zipcode"
+                    },
+                    firstName: {
+                        pattern: "Name cannot contain numbers or special characters"
+                    },
+                    lastName: {
+                        pattern: "Name cannot contain numbers or special characters"
+                    },
+                    city: {
+                        pattern: "City cannot contain numbers or special characters"
+                    },
+                    state: {
+                        pattern: "State cannot contain numbers or special characters"
+                    }
+                }
+            });
+
+            $('.qty').each(function() {
+
+                $(this).rules('add',
+                    {
+                        required: true,
+                        min: 0
+                    });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,30 @@
+﻿@using Northwind.Models
+@model IEnumerable<Northwind.Models.Order>
+
+@{
+    ViewBag.Title = "ProcessOrder";
+}
+
+<h2>ProcessOrder</h2>
+
+Your order of:
+<ul style="list-style: none">
+
+    @foreach (Order order in Model)
+    {
+        <li>
+            @order.Quantity - @Html.DisplayFor(modelItem => order.OrderedProduct.Name)
+        </li>
+    }
+
+</ul>
+<br/>
+Will be shipped to: <br /><br/>
+
+@ViewBag.firstName @ViewBag.lastName <br />
+@ViewBag.address <br />
+@ViewBag.city, @ViewBag.state @ViewBag.zipCode
+
+<br/>
+<br/>When your payment of $@ViewBag.total has been processed.
+<br/>Thank you for your patronage.

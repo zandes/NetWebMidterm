@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+<body>
+<!-- navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <!-- navbar header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-menu">
+                    <span class="glyphicon glyphicon-menu-hamburger" style="color: white;"></span>
+                </button>
+                <a href="#" class="navbar-brand"><span class="glyphicon glyphicon-home" style="padding-right: 5px;"></span>Home</a>
+            </div>
+            <div class="collapse navbar-collapse" id="collapse-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-shopping-cart" style="padding-right: 5px;"></span>Products<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Browse Categories</a>
+                            </li>
+                            <li>
+                                <a href="#">Product Search</a> 
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#">Current Discounts</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user" style="padding-right: 5px;"></span>Customers<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Sign In</a>
+                            </li>
+                            <li>
+                                <a href="#">Register</a>
+                            </li>
+                            <li>
+                                <a href="#">Your Account</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="hidden-xs">
+                        <form class="navbar-form">
+                            <input type="text" class="form-control" placeholder="Product Search"/>
+                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                        </form>
+                    </li>
+                </ul>
+                <div class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-log-out" style="padding-right: 5px;"></span>Sign Out</a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<!-- main -->
+<div class="container">
+    <div class="jumbotron">
+        <h1>Northwind</h1>
+        <p>We have the best prices and selection of high quality foods & beverages on the planet! Check out our featured discounts below!</p>
+        <button type="button" class="btn btn-primary">Place your order now</button>
+    </div>
+
+    <!-- grid system -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Discount 1</h3>
+                <p>This is a discount</p>
+                <a href="#" data-toggle="tooltip" data-placement="bottom" title="5555" style="text-decoration: none">Discount Code</a>
+            </div>
+            <div class="col-sm-4">
+                <h3>Discount 2</h3>
+                <p>This is a discount</p>
+                <a href="#" data-toggle="tooltip" data-placement="bottom" title="5555" style="text-decoration: none">Discount Code</a>
+            </div>
+            <div class="col-sm-4">
+                <h3>Discount 3</h3>
+                <p>This is a discount</p>
+                <a href="#" data-toggle="tooltip" data-placement="bottom" title="5555" style="text-decoration: none">Discount Code</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
+</script>
+</body>
+</html>
